@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>Hello World</title>
+      <title>博客建设记录</title>
       <link href="/2022/11/05/hello-world/"/>
       <url>/2022/11/05/hello-world/</url>
       
-        <content type="html"><![CDATA[<h2 id="建设中……2022-11-05"><a href="#建设中……2022-11-05" class="headerlink" title="建设中……2022-11-05"></a>建设中……2022-11-05</h2>]]></content>
+        <content type="html"><![CDATA[<p>致谢，建设教程来源于以下网站<br><a href="https://www.fomal.cc/">https://www.fomal.cc</a></p><hr><p>2022-10-01 namesilo域名<br>2022-11-04 github托管<br>2022-11-05 技术栈 &amp; 框架<br>博客框架：Hexo 6.2.0<br>主题：Butterfly 4.3.1<br>源码仓库：Github<br>托管与部署：本网站采用 Github Pages<br>2022-11-06 建设中……</p><hr>]]></content>
       
       
       
