@@ -20,7 +20,7 @@ function fetchWeather() {
 function createtime() {
     let now = new Date(); // 获取当前时间
     let siteStartTime = new Date("12/10/2022 00:00:00"); // 网站开始运行时间
-    let gaokaoDate = new Date("2026-06-07T00:00:00"); // 高考日期（2026年6月7日）
+    let gaokaoDate = new Date("07/06/2026 00:00:00"); // 高考日期（2026年6月7日）
 
     // 计算网站运行时间
     let timeDiff = now - siteStartTime;
