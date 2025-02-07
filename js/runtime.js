@@ -19,49 +19,54 @@ function fetchWeather() {
 
 function createtime() {
     let now = new Date(); // 获取当前时间
-    let startTime = new Date("12/10/2022 00:00:00"); // 计算起始时间
-    let voyagerStartTime = new Date("12/10/2022 00:00:00"); // 旅行者1号计算起点
-    let gaokaoDate = new Date("07/06/2026 00:00:00"); // 高考日期（2026年6月7日）
-
-    // 计算旅行者1号距离地球的千米数
-    let t = Math.trunc(234e8 + (now - startTime) / 1e3 * 17);
-    let a = (t / 1496e5).toFixed(6); // 转换为天文单位
+    let siteStartTime = new Date("12/10/2022 00:00:00"); // 网站开始运行时间
+    let gaokaoDate = new Date("2026-06-07T00:00:00"); // 高考日期（2026年6月7日）
 
     // 计算网站运行时间
-    let elapsedDays = Math.floor((now - voyagerStartTime) / (1000 * 60 * 60 * 24));
-    let elapsedHours = Math.floor((now - voyagerStartTime) / (1000 * 60 * 60)) % 24;
-    let elapsedMinutes = Math.floor((now - voyagerStartTime) / (1000 * 60)) % 60;
-    let elapsedSeconds = Math.floor((now - voyagerStartTime) / 1000) % 60;
+    let timeDiff = now - siteStartTime;
+    let totalSeconds = Math.floor(timeDiff / 1000);
+    let days = Math.floor(totalSeconds / 86400);
+    let hours = Math.floor((totalSeconds % 86400) / 3600);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    let seconds = totalSeconds % 60;
 
     // 补零处理
-    elapsedHours = elapsedHours.toString().padStart(2, "0");
-    elapsedMinutes = elapsedMinutes.toString().padStart(2, "0");
-    elapsedSeconds = elapsedSeconds.toString().padStart(2, "0");
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
 
     // 计算高考倒计时
-    let timeDiff = gaokaoDate - now;
     let gaokaoCountdown = "";
-    if (timeDiff > 0) {
-        let daysUntilGaokao = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-        gaokaoCountdown = `📚 距离2026年高考还有 <b>${daysUntilGaokao}</b> 天，加油！`;
+    let gaokaoDiff = gaokaoDate - now;
+    if (gaokaoDiff > 0) {
+        let remainingSeconds = Math.floor(gaokaoDiff / 1000);
+        if (remainingSeconds >= 86400) {
+            let daysUntilGaokao = Math.ceil(remainingSeconds / 86400);
+            gaokaoCountdown = `📚 距离2026年高考还有 <b>${daysUntilGaokao}</b> 天，加油！`;
+        } else {
+            let gHours = Math.floor(remainingSeconds / 3600);
+            let gMinutes = Math.floor((remainingSeconds % 3600) / 60);
+            let gSeconds = remainingSeconds % 60;
+
+            // 补零
+            gHours = String(gHours).padStart(2, "0");
+            gMinutes = String(gMinutes).padStart(2, "0");
+            gSeconds = String(gSeconds).padStart(2, "0");
+
+            gaokaoCountdown = `📚 距离2026年高考还有 <b>${gHours}</b> 小时 <b>${gMinutes}</b> 分钟 <b>${gSeconds}</b> 秒，加油！`;
+        }
     } else {
         gaokaoCountdown = "🎉 高考加油！愿你金榜题名！";
     }
 
-    // 判断时间段，切换不同的文本
-    let message = elapsedHours >= 9 && elapsedHours < 18
-        ? `<img class='boardsign' src="..." title="什么时候能够实现财富自由呀~"><br> 
-           <div style="font-size:13px;font-weight:bold">
-           本站已正常运行了 ${elapsedDays} 天 ${elapsedHours} 小时 ${elapsedMinutes} 分 ${elapsedSeconds} 秒 
-           <i id="heartbeat" class='fas fa-heartbeat'></i> <br>
-           旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div><br>
-           <div style="font-size:14px;font-weight:bold">${gaokaoCountdown}</div>`
-        : `<img class='boardsign' src="..." title="下班了就该开开心心地玩耍~"><br> 
-           <div style="font-size:13px;font-weight:bold">
-           本站已正常运行了 ${elapsedDays} 天 ${elapsedHours} 小时 ${elapsedMinutes} 分 ${elapsedSeconds} 秒 
-           <i id="heartbeat" class='fas fa-heartbeat'></i> <br>
-           旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div><br>
-           <div style="font-size:14px;font-weight:bold">${gaokaoCountdown}</div>`;
+    // 生成显示内容
+    let message = `
+        <div style="font-size:14px;font-weight:bold">
+            本站已正常运行了 <b>${days}</b> 天 <b>${hours}</b> 小时 <b>${minutes}</b> 分钟 <b>${seconds}</b> 秒
+        </div>
+        <br>
+        <div style="font-size:14px;font-weight:bold">${gaokaoCountdown}</div>
+    `;
 
     // 更新页面
     let workboard = document.getElementById("workboard");
