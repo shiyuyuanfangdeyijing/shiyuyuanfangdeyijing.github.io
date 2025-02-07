@@ -21,7 +21,7 @@ function createtime() {
     let now = new Date(); // 获取当前时间
     let startTime = new Date("12/10/2022 00:00:00"); // 计算起始时间
     let voyagerStartTime = new Date("12/10/2022 00:00:00"); // 旅行者1号计算起点
-    let gaokaoDate = new Date("2026-06-07T00:00:00"); // 高考日期（2026年6月7日）
+    let gaokaoDate = new Date("07/06/2026 00:00:00"); // 高考日期（2026年6月7日）
 
     // 计算旅行者1号距离地球的千米数
     let t = Math.trunc(234e8 + (now - startTime) / 1e3 * 17);
