@@ -1,9 +1,28 @@
+function fetchWeather() {
+    fetch("您的天气API地址") // 请提供 API 地址
+        .then(response => response.json())
+        .then(data => {
+            let weatherInfo = `🌤 天气：${data.weather}，温度：${data.temperature}℃`;
+            let weatherElement = document.getElementById("weather");
+            if (!weatherElement) {
+                weatherElement = document.createElement("div");
+                weatherElement.id = "weather";
+                weatherElement.style.fontSize = "13px";
+                weatherElement.style.fontWeight = "bold";
+                let workboard = document.getElementById("workboard");
+                if (workboard) workboard.appendChild(weatherElement);
+            }
+            weatherElement.innerHTML = weatherInfo;
+        })
+        .catch(error => console.error("天气信息获取失败:", error));
+}
+
 function createtime() {
     let now = new Date(); // 每次获取最新的当前时间
     let startTime = new Date("12/10/2022 00:00:00"); // 计算起始时间
     let voyagerStartTime = new Date("12/10/2022 00:00:00"); // 旅行者1号计算起点
 
-    // 计算旅行者1号距离地球的千米数（初始值 + 速度 * 经过的秒数）
+    // 计算旅行者1号距离地球的千米数
     let t = Math.trunc(234e8 + (now - startTime) / 1e3 * 17);
     let a = (t / 1496e5).toFixed(6); // 转换为天文单位
 
@@ -36,7 +55,17 @@ function createtime() {
     if (workboard) {
         workboard.innerHTML = message;
     }
+
+    // 获取天气信息
+    fetchWeather();
 }
 
-// 每秒更新一次
+// 每秒更新一次时间
 setInterval(createtime, 1000);
+
+// 每 10 分钟更新一次天气
+setInterval(fetchWeather, 600000);
+
+// 初始调用
+createtime();
+fetchWeather();
