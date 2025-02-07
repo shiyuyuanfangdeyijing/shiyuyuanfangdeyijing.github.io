@@ -41,6 +41,8 @@ var newYear = () => {
     time();
 };
 
+newYearElement.style.backgroundImage = 'none';
+
 // 防止 Pjax 事件重复绑定
 document.removeEventListener('pjax:complete', newYear);
 document.addEventListener('pjax:complete', newYear);
