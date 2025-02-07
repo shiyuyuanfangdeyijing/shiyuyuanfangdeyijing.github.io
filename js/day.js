@@ -3,22 +3,6 @@ m = d.getMonth() + 1;
 dd = d.getDate();
 y = d.getFullYear();
 
-document.addEventListener("DOMContentLoaded", function () {
-    let now = new Date();
-    let y = now.getFullYear();
-    let m = now.getMonth() + 1;
-    let dd = now.getDate();
-
-    // 获取本地存储的日期
-    let lastPopupDate = localStorage.getItem("popupDate");
-
-    // 如果今天还没弹出，则显示声明
-    if (lastPopupDate !== `${y}-${m}-${dd}`) {
-        Swal.fire("📢 声明", "欢迎访问本站！", "info");
-        localStorage.setItem("popupDate", `${y}-${m}-${dd}`); // 记录弹窗日期
-    }
-}
-
 // 公祭日
 if (m == 9 && dd == 18) {
     document.getElementsByTagName("html")[0].setAttribute("style", "filter: grayscale(60%);");
