@@ -5,6 +5,9 @@ var newYear = () => {
     let newYearElement = document.querySelector('#newYear');
     if (!newYearElement) return;
 
+    // 移除背景图
+    newYearElement.style.backgroundImage = 'none';
+
     // 新年时间戳 & 星期数组
     let newYearTimestamp = new Date('2026-02-17 00:00:00').getTime() / 1000;
     const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
