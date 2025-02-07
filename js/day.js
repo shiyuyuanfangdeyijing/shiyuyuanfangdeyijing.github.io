@@ -84,6 +84,19 @@ if (m == 5 && dd == 20) {//520
         sessionStorage.setItem("isPopupWindow", "1");
     }
 }
+let gaokaoMessages = [
+    "高考加油！📖✨\n愿所有考生沉着冷静，超常发挥，金榜题名！",
+    "十年寒窗无人问，一举成名天下知！祝你高考顺利！💪",
+    "今天的努力，是为了明天更好的自己！高考加油！🔥",
+    "自信点，你一定行！高考顺利，前程似锦！🚀",
+    "心态决定成败，沉着应考，稳定发挥！🎯"];
+if (m == 6 && dd >= 6 && dd <= 10) { // 高考加油（随机祝福）
+    if (sessionStorage.getItem("isPopupWindow") != "1") {
+        Swal.fire(gaokaoMessages[Math.floor(Math.random() * gaokaoMessages.length)]);
+        sessionStorage.setItem("isPopupWindow", "1");
+    }
+}
+
 if (m == 7 && dd == 1) {//建党节
     if (sessionStorage.getItem("isPopupWindow") != "1") {
         Swal.fire("祝中国共产党" + (y - 1921).toString() + "岁生日快乐！");
