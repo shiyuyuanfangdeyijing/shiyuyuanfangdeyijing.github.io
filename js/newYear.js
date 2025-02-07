@@ -3,7 +3,7 @@ var newYear = () => {
     clearTimeout(newYearTimer);
     if (!document.querySelector('#newYear')) return;
     // 新年时间戳 and 星期对象
-    let newYear = new Date('2025-01-29 00:00:00').getTime() / 1000,
+    let newYear = new Date('2026-02-17 00:00:00').getTime() / 1000,
         week = { 0: '周日', 1: '周一', 2: '周二', 3: '周三', 4: '周四', 5: '周五', 6: '周六' }
 
     time();
@@ -27,7 +27,7 @@ var newYear = () => {
             document.querySelector('#newYear .newYear-time').innerHTML = '<span class="happyNewYear">新年快乐</p>';
         } else {
             // 大于0则还未过年
-            document.querySelector('#newYear .title').innerHTML = '距离2025年春节：'
+            document.querySelector('#newYear .title').innerHTML = '距离2026年春节：'
 
             // 大于一天则直接渲染天数
             if (second > 86400) {
@@ -45,19 +45,7 @@ var newYear = () => {
             }
         }
     }
-
-    // 飘落
-    jQuery(document).ready(function ($) {
-        $('#newYear').wpSuperSnow({
-            flakes: ['', '', ''],
-            totalFlakes: '100',
-            zIndex: '999999',
-            maxSize: '30',
-            maxDuration: '20',
-            useFlakeTrans: false
-        });
-    });
-}
+    
 // Pjax适配：若没有开启Pjax这里直接是newYear()即可
 // 开了Pjax的用以下两句
 document.addEventListener('pjax:complete', newYear);
